@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="category">
+
+	<!-- User 생성시 기본값으로 Category를 설정해주는 기능 -->
+	<insert id="defaultCategory" parameterType="String">
+	<![CDATA[
+		insert into category values(null, '기타', '카테고리 목록', now(), #{id });
+	]]>
+	</insert>
+
+	<!-- main화면에서 catagory를 뿌려주는 기능 -->
+	<select id="categorymain" resultType="categoryvo"
+		parameterType="String">
+	<![CDATA[
+	select cat_no, id, name name from category where id = #{userId }
+	]]>
+	</select>
+
+	<!-- Category List를 출력해주는 xml -->
+	<select id="categoryList" resultType="categoryvo"
+		parameterType="String">
+	<![CDATA[
+	select cat.cat_no, cat.reg_date,
+	cat.name, count(ifnull(p.cat_no, "0")) as cat_count, 
+	cat.contents from category as cat left outer join post as p 
+	on cat.cat_no = p.cat_no  where id = #{userId }
+	group by cat.cat_no order by cat.cat_no desc;
+	]]>
+	</select>
+
+	<!-- Category 항목을 추가해주는 기능 -->
+	<insert id="categoryInsert" parameterType="categoryvo">
+	<![CDATA[
+	insert into category values(null, #{name }, #{contents }, now(), #{id }); 
+	]]>
+	</insert>
+	
+	<!-- writer에서 카테고리가 출력되게 해주는 기능 -->
+	<select id="writeCategoryList" parameterType="String" resultType="categoryvo">
+	<![CDATA[
+		select cat_no, name from category where id = #{userId };
+	]]>
+	</select>
+	
+	
+
+</mapper>
