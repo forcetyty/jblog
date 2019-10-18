@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="post">
+
+	<!-- writter에서 글을 입력할때 사용  -->
+	<insert id="postInsert" parameterType="postvo">
+		insert into post values(null, #{title }, #{contents }, now(), #{cat_no });
+	</insert>
+</mapper>
+
