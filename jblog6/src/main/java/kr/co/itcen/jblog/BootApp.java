@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class BootApp {
 
 
+	// Spring Boot 시작
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		SpringApplication.run(BootApp.class, args);

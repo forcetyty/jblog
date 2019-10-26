@@ -92,6 +92,7 @@ public class WebConfig implements WebMvcConfigurer {
 	}
 	
 	
+	// Interceptor 기능
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		// TODO Auto-generated method stub
